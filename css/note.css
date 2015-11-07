@@ -31,6 +31,6 @@
 			margin-left: 10px;
 		}
 
-		.alert-danger {
+		p span.alert-danger {
 			cursor: pointer;
 		}
