@@ -7,7 +7,8 @@ angular.module('ellipsis', [])
                 note: '=',
                 ellipsisExpandText: '@',
                 ellipsisCollapseText: '@',
-                ellipsisSymbol: '@'
+                ellipsisSymbol: '@',
+                timeTaken : '@'
             },
             compile: function(elem, attr, linker) {
 
@@ -24,9 +25,9 @@ angular.module('ellipsis', [])
                     '\'showLessText()\'>'
                     + ellipsisSymbol + scope.ellipsisCollapseText + '</span>' : ellipsisSymbol;
 
-
+                    var start , end;
                     function showFullText(element) {
-                        var binding = scope.note;
+                        var binding = scope.note.note;
 
                         element.text(binding).html(element.html() + appendCollapseString);
                         element.removeClass('scroll-hidden');
@@ -49,7 +50,7 @@ angular.module('ellipsis', [])
                     }
 
                     function buildEllipsis() {
-                        var binding = scope.note;
+                        var binding = scope.note.note;
                         var isTrustedHTML = false;
 
                         if (binding) {
@@ -99,8 +100,10 @@ angular.module('ellipsis', [])
                     function init() {
                         buildEllipsis();
                     }
-
+                    start = performance.now();
                     init();
+                    end = performance.now();
+                    scope.note.timeTaken = Math.round(end - start);
                 })
             }
         };
